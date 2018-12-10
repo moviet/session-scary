@@ -2,7 +2,8 @@ Scary - A simple session serializable for php
 ======================================================
 
 [![Build Status](https://img.shields.io/travis/vlexfid/session-scary.svg?style=flat-square)](https://travis-ci.com/vlexfid/session-scary)
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://doge.mit-license.org)  
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://doge.mit-license.org)
+[![Usage](https://img.shields.io/badge/usage-easy-ff69b4.svg)](https://github.com/vlexfid/php-encryption)
 
 A very simple session manager that may help you for handling scary styles on php
 
@@ -17,17 +18,16 @@ composer require "vlexfid/session-scary"
 ```
 
 ## Release
-The current version is only support for handling _global procedural_ session    
-Any contributions are welcome and please follow the basic rules
+The current released is only support for handling happy _global procedural_ session
 
 ## Features
-* Create single session
-* Generate multiple session
-* Evaluated session
-* Make auto increment
-* Custom session expiration
+* Create Single Session
+* Generate Multiple Session
+* Evaluate Session
+* Make Auto Increment
+* Custom Session Expiration
 * Regenerate Session Id
-* Remove session
+* Remove Session
 
 ## Usage
 
@@ -48,27 +48,27 @@ Any contributions are welcome and please follow the basic rules
   ```
   
   **Notes** : 
-  > When you refresh the browser the values will be **save** in session at first, it may useful for (eg. token, random, url)  
-  like common when you close the browser, everything will gone.
+  > When you refresh the browser the values will be **save** in session at first, you may need (eg. token, random, url)  
+  that doesn't want to lost when the page's refresh, like common you can use it as easy away
 
 ### Generate Multiple Session
-* To generate multiple session you can scratch like this
+* To generate session repository you can scratch like this
    ```php
-   Scary::mset('My Manager')
+   Scary::mset('My Session Manager')
       ->mkey(['Specialist','Senior','Junior'])
       ->mval(['value_1','value_2','value_3'])
       ->swap();
    ```   
 * or you can make other style like
    ```php
-   Scary::mset('My Manager')
+   Scary::mset('My Session Manager')
       ->mkey('Specialist, Senior, Junior') // without array
       ->mval([$variable_1, $variable_2, $variable_3])
       ->swap();
     ```
 * Then to get the value using multiple method on above
   ```php
-  Scary::read('My Manager','Junior'); // output => $variable_3
+  Scary::read('My Session Manager','Junior'); // output => $variable_3
   ```
 
   **Notes** : 
