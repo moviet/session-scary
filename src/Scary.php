@@ -286,7 +286,7 @@ class Scary
      */
     public function mkey($id)
     {
-        $ids = !is_array($id) ? explode(array_filter(',',$id)) : $id;
+        $ids = !is_array($id) ? array_filter(explode(',',$id)) : $id;
 
         self::$mkey = $ids;
 
@@ -300,7 +300,7 @@ class Scary
      */
     public function mval($value)
     {
-        $values = !is_array($value) ? explode(array_filter(',',$value)) : $value;
+        $values = !is_array($value) ? array_filter(explode(',',$value)) : $value;
 
         self::$mvalue = $values;
 
@@ -365,9 +365,9 @@ class Scary
      */
     public function mchange($mset, $mkey, $mvalue = null)
     {
-        $mkey = !is_array($mkey) ? explode(array_filter(',',$mkey)) : $mkey;
+        $mkey = !is_array($mkey) ? array_filter(explode(',',$mkey)) : $mkey;
 
-        $mvalue = !is_array($mvalue) ? explode(array_filter(',',$mvalue)) : $mvalue;
+        $mvalue = !is_array($mvalue) ? array_filter(explode(',',$mvalue)) : $mvalue;
         
         $value = array_combine($mkey, $mvalue);
         
@@ -390,7 +390,7 @@ class Scary
      */
     public function trash($key)
     {
-        $keys = !is_array($key) ? explode(array_filter(',',$key)) : $key;
+        $keys = !is_array($key) ? array_filter(explode(',',$key)) : $key;
 
         foreach ($keys as $val) {
 
