@@ -1,20 +1,24 @@
 Scary - A simple session serializable for php
 ======================================================
 
-[![Build Status](https://img.shields.io/travis/vlexfid/encryption.svg?style=flat-square)](https://travis-ci.com/vlexfid/encryption)
+[![Build Status](https://img.shields.io/travis/vlexfid/session-scary.svg?style=flat-square)](https://travis-ci.com/vlexfid/session-scary)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://doge.mit-license.org)  
 
-A very simple session *_scary_* manager that may help you for handling scary styles on php
+A very simple session manager that may help you for handling scary styles on php
 
 ## Requirements
 * Composer for installation
 
-## Jump Start
+## Quick Start
 
 #### Installation
 ```
 composer require "vlexfid/session-scary"
 ```
+
+## Release
+The current version is only support for handling _global procedural_ session    
+Any contributions are welcome and please follow the basic rules
 
 ## Features
 * Create single session
@@ -25,143 +29,136 @@ composer require "vlexfid/session-scary"
 * Regenerate Session Id
 * Remove session
 
-#### Release
-The current version is only support for handling _global procedural_ session    
-Any contributions are welcome and please follow the basic rules
+## Usage
 
-## Basic Usage
-
-#### Create Single Session
+### Create A Single Session
 * You can follow the humble style like below
   ```php
   Scary::set('my_token')->value('11001101')->get();
   ```
   the above will equivalent
 
-  `$_SESSION['my_token'] = '11001101'`
-
-  * Then to get your single session
   ```php
-  Scary::read('my_token');
-  
-  // output => 11001101
+  $_SESSION['my_token'] = '11001101'
+  ```
+
+* Then to get a single session
+  ```php
+  Scary::read('my_token'); // output => 11001101
   ```
   
   **Notes** : 
-	 > if you refresh the browser the session will be **save** and _never change_ (eg. token, random value)  
-    like common if you close the browser, everything will gone.
+  > When you refresh the browser the values will be **save** in session at first, it may useful for (eg. token, random, url)  
+  like common when you close the browser, everything will gone.
 
-#### Generate Multiple Session
-   * To generate multiple session you can scratch like this
+### Generate Multiple Session
+* To generate multiple session you can scratch like this
    ```php
    Scary::mset('My Manager');
-        ->mkey('Supervisor_1','Supervisor_2','Supervisor_3');
-        ->mval('value_1','value_2','value_3');
-        ->swap();
-   ```
-   * or you can make other style very simply on below
+      ->mkey(['Specialist','Senior','Junior']);
+      ->mval(['value_1','value_2','value_3']);
+      ->swap();
+   ```   
+* or you can make other style like
    ```php
    Scary::mset('My Manager');
-        ->mkey('Specialist, Senior, Junior');
-        ->mval('value_1, value_2, value_3');
-        ->swap();
+      ->mkey('Specialist, Senior, Junior'); // without array
+      ->mval([$variable_1, $variable_2, $variable_3]);
+      ->swap();
     ```
-
-  * Then to render using multiple session on above
+* Then to get the value using multiple method on above
   ```php
-  Scary::read('My Manager','Junior'); // any key you use; 
+  Scary::read('My Manager','Junior'); // output => $variable_3
   ```
 
   **Notes** : 
-  > if you refresh the browser the session will be **save** and like common if you close the browser,  
-  everything will gone.
+  > When you refresh the browser the values will be **save** in session at first, it may useful for (eg. token, random, url)  
+  like common when you close the browser, everything will gone.
 
-#### Evaluated Session
-   * For _single session_, you can change with different
+### Evaluated A Session
+* For _single session_, you can replace with something
    ```php
-   Scary::change('My Sesi','Run'); // Whatever the key you use; 
+   Scary::change('My Boss','Run'); // replace other value eg. Run
    ```
-   
-   To ensure it, you can dump and get a new scary thriller
-
-   * Then for _multiple session_, you can change like this
+* And for _multiple method_, you can replace like this
    ```php
    Scary::mchange('My Bread','My Chocolato','Eat Me');
    ```
-   Now you are going through changes, you can dump with yaayy.. delicious
+   
+  Now it was going through changes and you can dump with yayy...
 
-#### Make Auto Increment
-   * For example you may want to _block_ eg. session login attempt for single method
+### Make Auto Increment
+* For example you may want to _make_ eg. session login attempt using single method
    ```php
    Scary::set('my_key')->value('11001101')->inc(5)->get();
    ```
 
-   * For multiple set to _block_ eg. session login attempts
-      ```php
-      Scary::mset('My Desire Key');
-         ->mkey('Eat','Drink','Lick','Whatever..');
-         ->mval('Apple','Orange','Lollipop','Yayy..');
-         ->inc(5);
-         ->swap();
-      ```
+* Or using multiple set like
+  ```php
+  Scary::mset('My Desire Key');
+     ->mkey(['Eat','Drink','Lick','Whatever..']);
+     ->mval(['Apple','Orange','Lollipop','Yayy..']);
+     ->inc(5);
+     ->swap();
+  ```
 
-   On above will set auto-increment within **5 times** start from 0-5 when _browser refresh_
+  Example on above will be set auto-increment within **5 times** start from 0-5 after _browser refresh_
 
-   * If you want to remove the limit attempt on above then you must verify
+* If you want to verify eg. login session using on above, you can write like
    ```php
-   if (Scary::flinc('My Desire Key') !== true) 
+   if (Scary::flinc('My Desire Key') !== true)
+   
    // Do something
    ```
    **Notes** : 
-   > It will return **false** when session doesn't exists, then do something 
+   > It will return **false** when session doesn't exists, then you can do something 
 
-#### Custom Session Expired
-
-* You can set simply custom expiration for single method like so
+### Custom Session Expiration
+* You can set simply custom time to live using single method
    ```php
    Scary::set('my_key')->value('11001101')->ttl(5)->get();
    ```
-* And for multiple set with custom expiration please use *_live_* method
+   
+* Or using multiple set
    ```php
    Scary::mset('My Desire Key');
-        ->mkey('Smile','Happy','Affraid');
-        ->mval('Lost','Donate','Any Expression Here');
-        ->live(5);
-        ->swap();
+      ->mkey(['Smile','Happy','Affraid']);
+      ->mval(['Lost','Donate','Any Expression Here']);
+      ->live(5); // ttl
+      ->swap();
    ```
    **Notes** : 
-   > ttl or live on sample above will expires on **5 seconds**, then you can do something
+   > use _**ttl or live**_ like sample above, it's meant the session will expired within **5 minutes**
 
-#### Regenerate Session Id
-
-* You can check session does exists or not
+### Regenerate Session Id
+* You must check session was already exists or not
    ```php
    if (Scary::exist('my_session_key'))
+   
    // Do something
    ```
-* To regenerate session with create **New Id** you can grab this
+   
+* To regenerate session with create **new id** you can grab like
    ```php
    Scary::newId('my_session_key');
    ```
-* Or using this method to only **Refresh Id** like
+   
+* Or using this to only **refresh** session_id
    ```php
    Scary::refresh('my_session_key');
    ```
 
-#### Remove Session
-
-* To **remove** a single key your own session use this
+### Remove Session
+* To **remove** a single session you must provide the key
    ```php
    Scary::trash('my_session_key');
+   
    // Do something
    ```
-* Then to **destroy** all sessions using _safety_ method
+   
+* And **destroy** all sessions by initialize your session key
    ```php
    Scary::clean('my_session_key');
-   ```
-* Or using this method to only **Refresh Id** like
-   ```php
-   Scary::refresh('my_session_key');
    ```
 
 ## Example
@@ -187,9 +184,9 @@ $randomMult = bin2hex(random_bytes(16));
 $downloadUrl = 'github.com/vlexfid/session/scary';
 
 Scary::mset('Something key')
-   ->mkey('verify','token_key','mis-loggedin','download-url')
-   ->mval($verify,$randomMult,$loginId,$downloadUrl)
-   ->swap();
+  ->mkey(['verify','token_key','mis-loggedin','download-url'])
+  ->mval([$verify,$randomMult,$loginId,$downloadUrl])
+  ->swap();
 
 $yaycheck = Scary::read('Something key','download-url');
 
