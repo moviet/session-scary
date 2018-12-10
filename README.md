@@ -152,11 +152,14 @@ Any contributions are welcome and please follow the basic rules
 * To **remove** a single session you must provide the key
    ```php
    Scary::trash('my_session_key');
-   
-   // Do something
    ```
    
-* And **destroy** all sessions by initialize your session key
+* Or **remove** multiple session at once
+   ```php
+   Scary::trash('my_session_key, my_session_key_two, my_session_key3, and...');
+   ```
+   
+* Then to **destroy** all sessions and make them gone
    ```php
    Scary::clean('my_session_key');
    ```
