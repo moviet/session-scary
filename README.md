@@ -192,10 +192,7 @@ $yaycheck = Scary::read('Something key','download-url');
 
 // dump yaaaayyy : github.com/vlexfid/session/scary
 ```
+
 ## License
 
-<<<<<<< HEAD
 `Vlexfid/session-scary` is released under the MIT public license. See LICENSE for details.
-=======
-`Vlexfid/session-scary` is released under the MIT public license. See LICENSE for details.
->>>>>>> 18fda4299dd656dbf0534e0007b4a687c2166e56
