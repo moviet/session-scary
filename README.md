@@ -2,9 +2,10 @@ Scary - A simple session serializable for php
 ======================================================
 
 [![Build Status](https://img.shields.io/travis/vlexfid/session-scary.svg?style=flat-square)](https://travis-ci.com/vlexfid/session-scary)
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://doge.mit-license.org)  
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://doge.mit-license.org)
+[![Usage](https://img.shields.io/badge/usage-easy-ff69b4.svg)](https://github.com/vlexfid/php-encryption)
 
-A very simple session manager that may help you for handling scary styles on php
+A very simple session organizer that may help you for handling scary styles on php
 
 ## Requirements
 * Composer for installation
@@ -17,17 +18,16 @@ composer require "vlexfid/session-scary"
 ```
 
 ## Release
-The current version is only support for handling _global procedural_ session    
-Any contributions are welcome and please follow the basic rules
+The current released is only support for handling happy _global procedural_ session
 
 ## Features
-* Create single session
-* Generate multiple session
-* Evaluated session
-* Make auto increment
-* Custom session expiration
+* Create Single Session
+* Generate Multiple Session
+* Evaluate Session
+* Make Auto Increment
+* Custom Session Expiration
 * Regenerate Session Id
-* Remove session
+* Remove Session
 
 ## Usage
 
@@ -48,63 +48,66 @@ Any contributions are welcome and please follow the basic rules
   ```
   
   **Notes** : 
-  > When you refresh the browser the values will be **save** in session at first, it may useful for (eg. token, random, url)  
-  like common when you close the browser, everything will gone.
+  > When you refresh the browser the values will be **save** in session at first, you may need (eg. token, random, url)  
+  and don't want to lost when the page's refresh, just like common it may useful
 
 ### Generate Multiple Session
-* To generate multiple session you can scratch like this
+* You can fashion a session bunker on easy away
    ```php
-   Scary::mset('My Manager');
-      ->mkey(['Specialist','Senior','Junior']);
-      ->mval(['value_1','value_2','value_3']);
+   Scary::mset('My Session Manager')
+      ->mkey(['Specialist','Senior','Junior'])
+      ->mval(['value_1','value_2','value_3'])
       ->swap();
    ```   
-* or you can make other style like
+* Or you may relax with a free style
    ```php
-   Scary::mset('My Manager');
-      ->mkey('Specialist, Senior, Junior'); // without array
-      ->mval([$variable_1, $variable_2, $variable_3]);
+   $keys = ['Specialist','Senior','Junior'];
+   $values = ['Baz','Biz','Buz'];
+
+   Scary::mset('My Session Manager')
+      ->mkey($keys) 
+      ->mval($values)
       ->swap();
     ```
-* Then to get the value using multiple method on above
+* And then to express your tailor
   ```php
-  Scary::read('My Manager','Junior'); // output => $variable_3
+  Scary::read('My Session Manager','Junior'); // output => Buz
   ```
 
   **Notes** : 
-  > When you refresh the browser the values will be **save** in session at first, it may useful for (eg. token, random, url)  
-  like common when you close the browser, everything will gone.
+  > When you refresh the browser the values will be **save** in session at first, you may need (eg. token, random, url)  
+  and don't want to lost when the page's refresh, just like common it may useful
 
-### Evaluated A Session
-* For _single session_, you can replace with something
+### Evaluate A Session
+* For _single session_, you can replace with new something
    ```php
-   Scary::change('My Boss','Run'); // replace other value eg. Run
+   Scary::change('Angry Boss','Run'); // replace other value eg. Run
    ```
-* And for _multiple method_, you can replace like this
+* And for _multiple threat_, you can replace like this
    ```php
    Scary::mchange('My Bread','My Chocolato','Eat Me');
    ```
    
-  Now it was going through changes and you can dump with yayy...
+  Now that was going through changes and you can dump with yayy...
 
 ### Make Auto Increment
-* For example you may want to _make_ eg. session login attempt using single method
+* For example you may want to _make_ eg. login attempt using a single method
    ```php
    Scary::set('my_key')->value('11001101')->inc(5)->get();
    ```
 
-* Or using multiple set like
+* Or using multiple series
   ```php
-  Scary::mset('My Desire Key');
-     ->mkey(['Eat','Drink','Lick','Whatever..']);
-     ->mval(['Apple','Orange','Lollipop','Yayy..']);
-     ->inc(5);
+  Scary::mset('My Desire Key')
+     ->mkey(['Eat','Drink','Lick','Whatever..'])
+     ->mval(['Apple','Orange','Lollipop','Hufft..'])
+     ->inc(5) // <=
      ->swap();
   ```
 
-  Example on above will be set auto-increment within **5 times** start from 0-5 after _browser refresh_
+  On above example you make auto-increment max. **5 times**, start from 0-5
 
-* If you want to verify eg. login session using on above, you can write like
+* If you want to verify eg. session loggedin, you can write like
    ```php
    if (Scary::flinc('My Desire Key') !== true)
    
@@ -114,88 +117,104 @@ Any contributions are welcome and please follow the basic rules
    > It will return **false** when session doesn't exists, then you can do something 
 
 ### Custom Session Expiration
-* You can set simply custom time to live using single method
+* You can recruit a custom flash message, expirated or any creation like below
    ```php
    Scary::set('my_key')->value('11001101')->ttl(5)->get();
    ```
    
-* Or using multiple set
+* Or using multiple happy set
    ```php
-   Scary::mset('My Desire Key');
-      ->mkey(['Smile','Happy','Affraid']);
-      ->mval(['Lost','Donate','Any Expression Here']);
-      ->live(5); // ttl
+   Scary::mset('My Desire Key')
+      ->mkey(['Smile','Happy','Affraid'])
+      ->mval(['Lost','Donate','Any Expression Here'])
       ->swap();
+
+   Scary::live('My Desire Key', 5) // time bomb verify
    ```
    **Notes** : 
-   > use _**ttl or live**_ like sample above, it's meant the session will expired within **5 minutes**
+   > use _**ttl or live**_ like examples on above meant the session will expired within **5 minutes**
 
 ### Regenerate Session Id
-* You must check session was already exists or not
+* You may doubt with an existing session, you can ensure with this
    ```php
    if (Scary::exist('my_session_key'))
    
    // Do something
    ```
    
-* To regenerate session with create **new id** you can grab like
+* To regenerate session with create **new id** you can draw this
    ```php
    Scary::newId('my_session_key');
    ```
    
-* Or using this to only **refresh** session_id
+* Or using this to **refresh** session_id
    ```php
-   Scary::refresh('my_session_key');
+   Scary::refresh('my_session_key'); // session_regenerate_id(true)
    ```
 
 ### Remove Session
-* To **remove** a single session you must provide the key
+* To **remove** a single session with work like charm
    ```php
    Scary::trash('my_session_key');
-   
-   // Do something
    ```
    
-* And **destroy** all sessions by initialize your session key
+* Also **remove** multiple session at once
+   ```php
+   Scary::trash('my_session_key, my_session_key_two, my_session_key_three, next...');
+   ```
+   
+* And what if **destroy** all session and make them gone
    ```php
    Scary::clean('my_session_key');
    ```
 
 ## Example
 
-#### Create A Session
-
+#### Create A Single Session
 ```php
-require '__DIR__' . 'vendor/autoload.php';
+require '__DIR__' . '/vendor/autoload.php';
 
 use Vlexfid\Session\Scary;
 
-$randomToken = base64_encode(random_bytes(16));
+// Generate Cross Smile Request Poorgery
+$randomToken = base64_encode(random_bytes(32));
 
-Scary::set('Something key')->value($randomToken)->get();
+Scary::set('Imo Cry Attack')->value($randomToken)->get();
 
-$check = Scary::read('Something key');
+$check = Scary::read('Imo Cry Attack');
 
-// dump check : ec4a7498b9f44fefa1ba309799d88ab722b486369d
+// dump : JHs/jsakjkja87823hsalwatah989jsajh+sakCacanana83729Mama=
+```
 
+#### Create Multiple Session
+```php
+require '__DIR__' . '/vendor/autoload.php';
+
+use Vlexfid\Session\Scary;
+
+// Type whatever collection
 $verify = 'true';
-$loginId = '2928929-988787-8877-78688868';
-$randomMult = bin2hex(random_bytes(16));
-$downloadUrl = 'github.com/vlexfid/session/scary';
 
+// Type whatever collection
+$loginId = '2928929-988787-8877-78688868';
+
+// Type whatever collection
+$randomMult = bin2hex(random_bytes(16));
+
+// Type whatever collection
+$downloadUrl = 'github.com/vlexfid/session-scary';
+
+// Compile them in single bandage
 Scary::mset('Something key')
   ->mkey(['verify','token_key','mis-loggedin','download-url'])
-  ->mval([$verify,$randomMult,$loginId,$downloadUrl])
+  ->mval([$verify, $randomMult, $loginId, $downloadUrl])
   ->swap();
 
-$yaycheck = Scary::read('Something key','download-url');
+$clone = Scary::read('Something key','download-url');
 
-// dump yaaaayyy : github.com/vlexfid/session/scary
+// dump yaaaayyy : github.com/vlexfid/session-scary
 ```
+
 ## License
 
-<<<<<<< HEAD
-`Vlexfid/session-scary` is released under the MIT public license. See LICENSE for details.
-=======
-`Vlexfid/session-scary` is released under the MIT public license. See LICENSE for details.
->>>>>>> 18fda4299dd656dbf0534e0007b4a687c2166e56
+`Vlexfid/session-scary` is released under the MIT public license. See LICENSE for details

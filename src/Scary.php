@@ -13,7 +13,7 @@
 namespace Vlexfid\Session;
 
 /**
-* let's start new scary thriller
+* start new scary thriller
 */
 class Scary
 {
@@ -38,7 +38,7 @@ class Scary
     protected static $story;
     
     /**
-     * @param string session key
+     * @param string session exist
      */
     protected static $exist;
     
@@ -48,7 +48,7 @@ class Scary
     protected static $inc;
     
     /**
-     * set limit increment
+     * set variable limit
      */
     protected static $limit;
     
@@ -94,7 +94,7 @@ class Scary
     const INCREMENT_KEY_START = 1;
 
     /**
-     * Check if session was already started
+     * Check if session id was already started
      */
     public function __construct() 
     {
@@ -122,7 +122,7 @@ class Scary
     }
 
     /**
-     * @param string create session expire time in seconds
+     * @param int create session expired in seconds
      */
     public function ttl($ttl)
     {
@@ -132,7 +132,7 @@ class Scary
     }
 
     /**
-     * @param string create session increment
+     * @param int create session increment
      */
     public function inc($increment = null)
     {
@@ -153,6 +153,7 @@ class Scary
      * Verify session increment
      * 
      * @param string session key
+     * 
      * @return boolen;
      */
     public function flinc($key, $default = false)
@@ -195,7 +196,7 @@ class Scary
 
     /**
      * Save session with single method
-     * Create session expire snd session increment
+     * Create session expire and session increment
      * 
      * Remove if session key has expired
      */
@@ -223,7 +224,7 @@ class Scary
         }
 
         /**
-         * Check if session expiration was negotiated
+         * Check if session expirated was negotiated
          */
         if (self::$entry === time()) {
 
@@ -246,10 +247,12 @@ class Scary
     }
 
     /**
-     * Revision session value
-     * Generate ttl if it was set
+     * Revision any session value
+     * Generate timer when it was set
      * 
      * @param string session_key and new value
+     * 
+     * @return boolen if doesn't exists
      */
     public function change($key, $value)
     {
@@ -286,7 +289,7 @@ class Scary
      */
     public function mkey($id)
     {
-        $ids = !is_array($id) ? explode(array_filter(',',$id)) : $id;
+        $ids = !is_array($id) ? array_filter(explode(',',$id)) : $id;
 
         self::$mkey = $ids;
 
@@ -300,7 +303,7 @@ class Scary
      */
     public function mval($value)
     {
-        $values = !is_array($value) ? explode(array_filter(',',$value)) : $value;
+        $values = !is_array($value) ? array_filter(explode(',',$value)) : $value;
 
         self::$mvalue = $values;
 
@@ -356,18 +359,19 @@ class Scary
     }
 
     /**
-     * Set to evaluate multi session replace
+     * Evaluate multi session replacement
      * 
      * @param string session key and subkey and new value
      * 
      * @return array session set
+     * 
      * @return boolen if emtpy session
      */
     public function mchange($mset, $mkey, $mvalue = null)
     {
-        $mkey = !is_array($mkey) ? explode(array_filter(',',$mkey)) : $mkey;
+        $mkey = !is_array($mkey) ? array_filter(explode(',',$mkey)) : $mkey;
 
-        $mvalue = !is_array($mvalue) ? explode(array_filter(',',$mvalue)) : $mvalue;
+        $mvalue = !is_array($mvalue) ? array_filter(explode(',',$mvalue)) : $mvalue;
         
         $value = array_combine($mkey, $mvalue);
         
@@ -382,15 +386,15 @@ class Scary
     }
 
     /**
-     * Set session key to remove and clean session increment
+     * Remove any existing keys and keep clean
      * 
      * @param string session key 
-     *
+     * 
      * @return boolen if emtpy session
      */
     public function trash($key)
     {
-        $keys = !is_array($key) ? explode(array_filter(',',$key)) : $key;
+        $keys = !is_array($key) ? array_filter(explode(',',$key)) : $key;
 
         foreach ($keys as $val) {
 
@@ -402,7 +406,7 @@ class Scary
     }
 
     /**
-     * Regenerate session id if session exists
+     * Regenerate session id when they were exists
      * 
      * @param string session key 
      */
@@ -415,7 +419,7 @@ class Scary
     }
 
     /**
-     * Regenerate new session id if session exists
+     * Regenerate new session id when they were exists
      * 
      * @param string session key 
      */
@@ -428,9 +432,9 @@ class Scary
     }
 
     /**
-     * Destroy session id if session exists
+     * Destroy session id when they were exists
      * 
-     * @param string session key 
+     * @param boolen value
      */
     public function clean($key)
     {
@@ -445,10 +449,10 @@ class Scary
     }
 
     /**
-     * Make session unserializable
-     * Ready to read
+     * Make session readable
+     * Read to read
      * 
-     * @param unserialize session
+     * @param array session
      */
     protected function make($key, $id = null)
     {
@@ -456,9 +460,9 @@ class Scary
     } 
 
     /**
-     * Make session increment if set
+     * Make session auto increment
      * 
-     * @return serialize session
+     * @return string serializable session
      */
     protected function sinc($key)
     {
@@ -468,7 +472,7 @@ class Scary
     /**
      * Save session early
      * 
-     * @return serialize session
+     * @return string serialize session
      */
     protected function save($key, $value)
     {
@@ -478,7 +482,7 @@ class Scary
     /**
      * Check if session does exists
      * 
-     * @return serialize session
+     * @return boolen serialize session
      */
     public function exist($key)
     {
