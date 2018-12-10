@@ -163,7 +163,7 @@ The current released is only support for handling happy _global procedural_ sess
    Scary::trash('my_session_key, my_session_key_two, my_session_key_three, next...');
    ```
    
-* And what if **destroy** all session and make them gone
+* And want to **destroy** all session and make them gone
    ```php
    Scary::clean('my_session_key');
    ```
