@@ -163,8 +163,7 @@ Any contributions are welcome and please follow the basic rules
 
 ## Example
 
-#### Create A Session
-
+#### Create A Single Session
 ```php
 require '__DIR__' . 'vendor/autoload.php';
 
@@ -177,10 +176,20 @@ Scary::set('Something key')->value($randomToken)->get();
 $check = Scary::read('Something key');
 
 // dump check : ec4a7498b9f44fefa1ba309799d88ab722b486369d
+```
+
+#### Create Multiple Session
+```php
+require '__DIR__' . 'vendor/autoload.php';
+
+use Vlexfid\Session\Scary;
 
 $verify = 'true';
+
 $loginId = '2928929-988787-8877-78688868';
+
 $randomMult = bin2hex(random_bytes(16));
+
 $downloadUrl = 'github.com/vlexfid/session/scary';
 
 Scary::mset('Something key')
