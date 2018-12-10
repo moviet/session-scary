@@ -54,16 +54,16 @@ Any contributions are welcome and please follow the basic rules
 ### Generate Multiple Session
 * To generate multiple session you can scratch like this
    ```php
-   Scary::mset('My Manager');
-      ->mkey(['Specialist','Senior','Junior']);
-      ->mval(['value_1','value_2','value_3']);
+   Scary::mset('My Manager')
+      ->mkey(['Specialist','Senior','Junior'])
+      ->mval(['value_1','value_2','value_3'])
       ->swap();
    ```   
 * or you can make other style like
    ```php
-   Scary::mset('My Manager');
-      ->mkey('Specialist, Senior, Junior'); // without array
-      ->mval([$variable_1, $variable_2, $variable_3]);
+   Scary::mset('My Manager')
+      ->mkey('Specialist, Senior, Junior') // without array
+      ->mval([$variable_1, $variable_2, $variable_3])
       ->swap();
     ```
 * Then to get the value using multiple method on above
@@ -95,10 +95,10 @@ Any contributions are welcome and please follow the basic rules
 
 * Or using multiple set like
   ```php
-  Scary::mset('My Desire Key');
-     ->mkey(['Eat','Drink','Lick','Whatever..']);
-     ->mval(['Apple','Orange','Lollipop','Yayy..']);
-     ->inc(5);
+  Scary::mset('My Desire Key')
+     ->mkey(['Eat','Drink','Lick','Whatever..'])
+     ->mval(['Apple','Orange','Lollipop','Yayy..'])
+     ->inc(5)
      ->swap();
   ```
 
@@ -121,10 +121,10 @@ Any contributions are welcome and please follow the basic rules
    
 * Or using multiple set
    ```php
-   Scary::mset('My Desire Key');
-      ->mkey(['Smile','Happy','Affraid']);
-      ->mval(['Lost','Donate','Any Expression Here']);
-      ->live(5); // ttl
+   Scary::mset('My Desire Key')
+      ->mkey(['Smile','Happy','Affraid'])
+      ->mval(['Lost','Donate','Any Expression Here'])
+      ->live(5) // ttl
       ->swap();
    ```
    **Notes** : 
@@ -156,7 +156,7 @@ Any contributions are welcome and please follow the basic rules
    
 * Or **remove** multiple session at once
    ```php
-   Scary::trash('my_session_key, my_session_key_two, my_session_key3, and...');
+   Scary::trash('my_session_key, my_session_key_two, my_session_key_three, and...');
    ```
    
 * Then to **destroy** all sessions and make them gone
@@ -197,7 +197,7 @@ $downloadUrl = 'github.com/vlexfid/session/scary';
 
 Scary::mset('Something key')
   ->mkey(['verify','token_key','mis-loggedin','download-url'])
-  ->mval([$verify,$randomMult,$loginId,$downloadUrl])
+  ->mval([$verify, $randomMult, $loginId, $downloadUrl])
   ->swap();
 
 $yaycheck = Scary::read('Something key','download-url');
