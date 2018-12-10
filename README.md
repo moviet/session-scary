@@ -102,9 +102,9 @@ Any contributions are welcome and please follow the basic rules
      ->swap();
   ```
 
-  Example on above will be set auto-increment within **5 times** start from 0-5 when _browser refresh_
+  Example on above will be set auto-increment within **5 times** start from 0-5 after _browser refresh_
 
-* If you want to verify eg. login session on above then you can style like
+* If you want to verify eg. login session using on above, you can write like
    ```php
    if (Scary::flinc('My Desire Key') !== true)
    
@@ -128,10 +128,10 @@ Any contributions are welcome and please follow the basic rules
       ->swap();
    ```
    **Notes** : 
-   > use _**ttl or live**_ like sample above, it will produce expired within **5 seconds**
+   > use _**ttl or live**_ like sample above, it's meant the session will expired within **5 minutes**
 
 ### Regenerate Session Id
-* You must check session does exists or not
+* You must check session was already exists or not
    ```php
    if (Scary::exist('my_session_key'))
    
@@ -143,7 +143,7 @@ Any contributions are welcome and please follow the basic rules
    Scary::newId('my_session_key');
    ```
    
-* Or using this to **refresh** session_id
+* Or using this to only **refresh** session_id
    ```php
    Scary::refresh('my_session_key');
    ```
@@ -156,7 +156,7 @@ Any contributions are welcome and please follow the basic rules
    // Do something
    ```
    
-* And to **destroy** all session by initialize your session key
+* And **destroy** all sessions by initialize your session key
    ```php
    Scary::clean('my_session_key');
    ```
