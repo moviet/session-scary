@@ -1,0 +1,30 @@
+{
+    "name": "vlexfid/session-scary",
+    "description": "A simple session serializable library for php",
+    "keywords": ["session", "handler", "wrapper", "token", "simple", "global"],
+    "homepage": "https://github.com/vlexfid/session-scary",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vlexfid",
+            "email": "snorthfed@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vlexfid\\Session\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vlexfid\\Testing\\": "tests/"
+        }
+     },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    }
+}
