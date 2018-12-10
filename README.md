@@ -48,7 +48,7 @@ Any contributions are welcome and please follow the basic rules
   ```
   
   **Notes** : 
-	 > if you refresh the browser the values will be **save** in session at first, it may useful for (eg. token, random, url)  
+  > When you refresh the browser the values will be **save** in session at first, it may useful for (eg. token, random, url)  
   like common when you close the browser, everything will gone.
 
 ### Generate Multiple Session
@@ -62,8 +62,8 @@ Any contributions are welcome and please follow the basic rules
 * or you can make other style like
    ```php
    Scary::mset('My Manager');
-      ->mkey('Specialist, Senior, Junior');
-      ->mval('value_1, value_2, value_3');
+      ->mkey('Specialist, Senior, Junior'); // without array
+      ->mval([$variable_1, $variable_2, $variable_3]);
       ->swap();
     ```
 * Then to get the value using multiple method on above
@@ -72,7 +72,7 @@ Any contributions are welcome and please follow the basic rules
   ```
 
   **Notes** : 
-  > if you refresh the browser the values will be **save** in session at first, it may useful for (eg. token, random, url)  
+  > When you refresh the browser the values will be **save** in session at first, it may useful for (eg. token, random, url)  
   like common when you close the browser, everything will gone.
 
 ### Evaluated A Session
