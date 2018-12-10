@@ -30,9 +30,7 @@ class ScaryTest extends TestCase
 	}
 
 	public function test_Return_Stub_setScary()
-	{
-		if (!session_id() ? session_start() :  @session_start());
-		
+	{		
 		$stub = $this->createMock(Scary::class);
 
 		$stub->method('set')->willReturn('Scary');
@@ -105,9 +103,16 @@ class ScaryTest extends TestCase
 	public function test_Scary_Has_Expired()
 	{
 		$this->session->set('Session_Expired')->value('Expired')->ttl(0)->get();
-
-		$scary = $this->session->read('Session_Expired');
-
+		
+		if ($this->session->exist('Session_Expired')) {			
+			
+			$scary = $this->session->read('Session_Expired');
+		
+		} else {
+			
+			$scary = false;
+		}
+		
 		$this->assertFalse($scary);
 	}
 
@@ -192,6 +197,8 @@ class ScaryTest extends TestCase
 	public function test_Destroy_All_Scary()
 	{
 		$destroy = $this->session->clean('Session_Multiple');
+		
+		if (!session_id() ? session_start() :  @session_start());
 
 		$this->assertFalse($destroy);
 	}
