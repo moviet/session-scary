@@ -52,7 +52,7 @@ The current released is only support for handling happy _global procedural_ sess
   and don't want to lost when the page's refresh, just like common it may useful
 
 ### Generate Multiple Session
-* You can fashion a session bunker on easy away
+* You can fashion a session banks on easy away
    ```php
    Scary::mset('My Session Manager')
       ->mkey(['Specialist','Senior','Junior'])
@@ -83,7 +83,7 @@ The current released is only support for handling happy _global procedural_ sess
    ```php
    Scary::change('Angry Boss','Run'); // replace other value eg. Run
    ```
-* And for _multiple threat_, you can replace like this
+* And for _multiple sets_, you can replace like this
    ```php
    Scary::mchange('My Bread','My Chocolato','Eat Me');
    ```
@@ -91,7 +91,7 @@ The current released is only support for handling happy _global procedural_ sess
   Now that was going through changes and you can dump with yayy...
 
 ### Make Auto Increment
-* For example you may want to _make_ eg. login attempt using a single method
+* For example you may want to make eg. _login attempt_ using a single method
    ```php
    Scary::set('my_key')->value('11001101')->inc(5)->get();
    ```
@@ -105,9 +105,9 @@ The current released is only support for handling happy _global procedural_ sess
      ->swap();
   ```
 
-  On above example you make auto-increment max. **5 times**, start from 0-5
+  On above example you will get an auto-increment max. **5 times**, start from 0-5
 
-* If you want to verify eg. session loggedin, you can write like
+* If you want to verify eg. _session loggedin_, you can write like
    ```php
    if (Scary::flinc('My Desire Key') !== true)
    
@@ -117,19 +117,19 @@ The current released is only support for handling happy _global procedural_ sess
    > It will return **false** when session doesn't exists, then you can do something 
 
 ### Custom Session Expiration
-* You can recruit a custom flash message, expirated or any creation like below
+* You can recruit a custom flash message, expirated or any creations
    ```php
    Scary::set('my_key')->value('11001101')->ttl(5)->get();
    ```
    
-* Or using multiple happy set
+* Using multiple happy set
    ```php
    Scary::mset('My Desire Key')
       ->mkey(['Smile','Happy','Affraid'])
       ->mval(['Lost','Donate','Any Expression Here'])
       ->swap();
 
-   Scary::live('My Desire Key', 5) // time bomb verify
+   Scary::live('My Desire Key', 5) // it can be place in somewhere pages, if return false, you can do something
    ```
    **Notes** : 
    > use _**ttl or live**_ like examples on above meant the session will expired within **5 minutes**
@@ -158,12 +158,12 @@ The current released is only support for handling happy _global procedural_ sess
    Scary::trash('my_session_key');
    ```
    
-* Also **remove** multiple session at once
+* And **remove** multiple session at once
    ```php
    Scary::trash('my_session_key, my_session_key_two, my_session_key_three, next...');
    ```
    
-* And want to **destroy** all session and make them gone
+* Also you can **destroy** all session and make them gone
    ```php
    Scary::clean('my_session_key');
    ```
@@ -195,20 +195,20 @@ use Vlexfid\Session\Scary;
 // Type whatever collection
 $verify = 'true';
 
-// Type whatever collection
+// Type whatever you need
 $loginId = '2928929-988787-8877-78688868';
 
-// Type whatever collection
+// Type whatever you set
 $randomMult = bin2hex(random_bytes(16));
 
-// Type whatever collection
+// Type anything you type
 $downloadUrl = 'github.com/vlexfid/session-scary';
 
 // Compile them in single bandage
 Scary::mset('Something key')
-  ->mkey(['verify','token_key','mis-loggedin','download-url'])
-  ->mval([$verify, $randomMult, $loginId, $downloadUrl])
-  ->swap();
+->mkey(['verify','token_key','mis-loggedin','download-url'])
+->mval([$verify, $randomMult, $loginId, $downloadUrl])
+->swap();
 
 $clone = Scary::read('Something key','download-url');
 
