@@ -68,7 +68,7 @@ Any contributions are welcome and please follow the basic rules
     ```
 * Then to get the value using multiple method on above
   ```php
-  Scary::read('My Manager','Junior'); // output => value_3
+  Scary::read('My Manager','Junior'); // output => $variable_3
   ```
 
   **Notes** : 
