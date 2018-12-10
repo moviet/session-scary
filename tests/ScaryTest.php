@@ -26,11 +26,13 @@ class ScaryTest extends TestCase
 	
 	public function setUp() 
 	{
-		if (!session_id() ? session_start() :  @session_start());
+		$this->session = new Scary;
 	}
 
 	public function test_Return_Stub_setScary()
 	{
+		if (!session_id() ? session_start() :  @session_start());
+		
 		$stub = $this->createMock(Scary::class);
 
 		$stub->method('set')->willReturn('Scary');
@@ -40,8 +42,6 @@ class ScaryTest extends TestCase
 
 	public function test_Scary_Has_Been_Set()
 	{	
-		$this->session = new Scary;
-
 		$this->session->set('Session_Test')->value('Test')->get();
 
 		$scare = $this->session->read('Session_Test');
@@ -64,7 +64,7 @@ class ScaryTest extends TestCase
 
 		if ($this->session->flinc('Session_Test') !== true) {
 
-				$increment = true;
+			$increment = true;
 		}
 
 		$this->assertTrue($increment);
