@@ -22,174 +22,179 @@ use PHPunit\Framework\TestCase;
 */
 class ScaryTest extends TestCase
 {
-		public function setUp() {}
+	public $session;
+	
+	public function setUp() 
+	{
+		if (!session_id() ? session_start() :  @session_start());
+	}
 
-		public function test_Return_Stub_setScary()
-		{
-				$stub = $this->createMock(Scary::class);
+	public function test_Return_Stub_setScary()
+	{
+		$stub = $this->createMock(Scary::class);
 
-				$stub->method('set')->willReturn('Scary');
+		$stub->method('set')->willReturn('Scary');
 
-				$this->assertEquals('Scary', $stub->set('Scary'));
+		$this->assertEquals('Scary', $stub->set('Scary'));
+	}
+
+	public function test_Scary_Has_Been_Set()
+	{	
+		$this->session = new Scary;
+
+		$this->session->set('Session_Test')->value('Test')->get();
+
+		$scare = $this->session->read('Session_Test');
+
+		$this->assertInternalType('string', $scare, gettype($scare));
+	}
+
+	public function test_Return_Stub_Scary_setIncrement()
+	{
+		$stub = $this->createMock(Scary::class);
+
+		$stub->method('ttl')->willReturn(0);
+
+		$this->assertSame(0, $stub->ttl(0));
+	}
+
+	public function test_Scary_Not_Increment()
+	{
+		$this->session->set('Session_Test')->value('Test')->inc(0)->get();
+
+		if ($this->session->flinc('Session_Test') !== true) {
+
+				$increment = true;
 		}
 
-		public function test_Scary_Has_Been_Set()
-		{	
-				$this->session = new Scary;
+		$this->assertTrue($increment);
+	}
 
-				$this->session->set('Session_Test')->value('Test')->get();
+	public function test_Scary_Was_Already_Exists()
+	{
+		$scary = $this->session->exist('Session_Test');
 
-				$scare = $this->session->read('Session_Test');
+		$this->assertTrue($scary);
+	}
 
-				$this->assertInternalType('string', $scare, gettype($scare));
-		}
+	public function test_Scary_Does_Not_Exists()
+	{
+		$scary = $this->session->exist('Session_False');
 
-		public function test_Return_Stub_Scary_setIncrement()
-		{
-				$stub = $this->createMock(Scary::class);
+		$this->assertFalse($scary);
+	}
 
-				$stub->method('ttl')->willReturn(0);
+	public function test_Scary_Was_Replaced()
+	{
+		$scare = $this->session->read('Session_Test');
 
-				$this->assertSame(0, $stub->ttl(0));
-		}
+		$scary = $this->session->change('Session_Test','Replace Test');
 
-		public function test_Scary_Not_Increment()
-		{
-				$this->session->set('Session_Test')->value('Test')->inc(0)->get();
+		$this->assertNotEquals($scare, $scary);
+	}
 
-				if ($this->session->flinc('Session_Test') !== true) {
-				
-						$increment = true;
-				}
+	public function test_Return_Stub_Scary_setExpired()
+	{
+		$stub = $this->createMock(Scary::class);
 
-				$this->assertTrue($increment);
-		}
+		$stub->method('ttl')->willReturn(5);
 
-		public function test_Scary_Was_Already_Exists()
-		{
-				$scary = $this->session->exist('Session_Test');
+		$this->assertSame(5, $stub->ttl(5));
+	}
 
-				$this->assertTrue($scary);
-		}
+	public function test_Scary_Has_Expired()
+	{
+		$this->session->set('Session_Expired')->value('Expired')->ttl(0)->get();
 
-		public function test_Scary_Does_Not_Exists()
-		{
-				$scary = $this->session->exist('Session_False');
+		$scary = $this->session->read('Session_Expired');
 
-				$this->assertFalse($scary);
-		}
+		$this->assertFalse($scary);
+	}
 
-		public function test_Scary_Was_Replaced()
-		{
-				$scare = $this->session->read('Session_Test');
+	public function test_Read_Multiple_Scary()
+	{
+		$this->session->mset('Session_Multiple')
+					->mkey(['Exist','Increment','Expired'])
+					->mval(['Exist','Increment','Expired'])
+					->swap();
 
-				$scary = $this->session->change('Session_Test','Replace Test');
+		$scare = $this->session->read('Session_Multiple','Exist');
 
-				$this->assertNotEquals($scare, $scary);
-		}
+		$value = 'Exist';
 
-		public function test_Return_Stub_Scary_setExpired()
-		{
-				$stub = $this->createMock(Scary::class);
+		$this->assertEquals($scare, $value);
+	}
 
-				$stub->method('ttl')->willReturn(5);
+	public function test_Return_multiScary_Set()
+	{
+		$stub = $this->createMock(Scary::class);
 
-				$this->assertSame(5, $stub->ttl(5));
-		}
+		$stub->method('mset')->willReturn('multi session');
 
-		public function test_Scary_Has_Expired()
-		{
-				$this->session->set('Session_Expired')->value('Expired')->ttl(0)->get();
+		$this->assertEquals('multi session', $stub->mset('multi session'));
+	}
 
-				$scary = $this->session->read('Session_Expired');
+	public function test_Return_multiScary_Key()
+	{
+		$stub = $this->createMock(Scary::class);
 
-				$this->assertFalse($scary);
-		}
+		$stub->method('mkey')->willReturn('multi key');
 
-		public function test_Read_Multiple_Scary()
-		{
-				$this->session->mset('Session_Multiple')
-							->mkey(['Exist','Increment','Expired'])
-							->mval(['Exist','Increment','Expired'])
-							->swap();
+		$this->assertEquals('multi key', $stub->mkey('multi key'));
+	}
 
-				$scare = $this->session->read('Session_Multiple','Exist');
+	public function test_Return_multiScary_Value()
+	{
+		$stub = $this->createMock(Scary::class);
 
-				$value = 'Exist';
+		$stub->method('mval')->willReturn('multi value');
 
-				$this->assertEquals($scare, $value);
-		}
+		$this->assertEquals('multi value', $stub->mval('multi value'));
+	}
 
-		public function test_Return_multiScary_Set()
-		{
-				$stub = $this->createMock(Scary::class);
+	public function test_Replace_Multiple_Scary()
+	{
+		$incres = $this->session->read('Session_Multiple','Increment');
 
-				$stub->method('mset')->willReturn('multi session');
+		$this->session->mchange('Session_Multiple','Increment','Decrement');
 
-				$this->assertEquals('multi session', $stub->mset('multi session'));
-		}
+		$replace = $this->session->read('Session_Multiple','Increment');
 
-		public function test_Return_multiScary_Key()
-		{
-				$stub = $this->createMock(Scary::class);
+		$this->assertNotEquals($incres, $replace);
+	}
 
-				$stub->method('mkey')->willReturn('multi key');
+	public function test_Multiple_Scary_setExpired()
+	{
+		$this->session->mset('Session_Multi_Expired')
+					->mkey(['Orange','Banana','Purple'])
+					->mval(['Oranye','Pisang','Chocolato'])
+					->swap();
 
-				$this->assertEquals('multi key', $stub->mkey('multi key'));
-		}
+		$expired = $this->session->live('Session_Multi_Expired', 0);
 
-		public function test_Return_multiScary_Value()
-		{
-				$stub = $this->createMock(Scary::class);
+		$this->assertTrue($expired);
+	}
 
-				$stub->method('mval')->willReturn('multi value');
+	public function test_Remove_Single_Scary()
+	{
+		$remove = $this->session->trash('Session_Multi_Expired');
 
-				$this->assertEquals('multi value', $stub->mval('multi value'));
-		}
+		$this->assertFalse($remove);
+	}
 
-		public function test_Replace_Multiple_Scary()
-		{
-				$incres = $this->session->read('Session_Multiple','Increment');
+	public function test_Remove_Multi_Scary()
+	{
+		$remove = $this->session->trash('Session_Multi_Expired','Session_Multiple');
 
-				$this->session->mchange('Session_Multiple','Increment','Decrement');
+		$this->assertFalse($remove);
+	}
 
-				$replace = $this->session->read('Session_Multiple','Increment');
+	public function test_Destroy_All_Scary()
+	{
+		$destroy = $this->session->clean('Session_Multiple');
 
-				$this->assertNotEquals($incres, $replace);
-		}
+		$this->assertFalse($destroy);
+	}
 
-		public function test_Multiple_Scary_setExpired()
-		{
-				$this->session->mset('Session_Multi_Expired')
-							->mkey(['Orange','Banana','Purple'])
-							->mval(['Oranye','Pisang','Chocolato'])
-							->swap();
-
-				$expired = $this->session->live('Session_Multi_Expired', 0);
-
-				$this->assertTrue($expired);
-		}
-
-		public function test_Remove_Single_Scary()
-		{
-				$remove = $this->session->trash('Session_Multi_Expired');
-				
-				$this->assertFalse($remove);
-		}
-
-		public function test_Remove_Multi_Scary()
-		{
-				$remove = $this->session->trash('Session_Multi_Expired','Session_Multiple');
-				
-				$this->assertFalse($remove);
-		}
-
-		public function test_Destroy_All_Scary()
-		{
-				$destroy = $this->session->clean('Session_Multiple');
-				
-				$this->assertFalse($destroy);
-		}
-		
-		public function tearDown() {}
+	public function tearDown() {}
 }
