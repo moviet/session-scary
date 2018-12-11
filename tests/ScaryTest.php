@@ -110,10 +110,10 @@ class ScaryTest extends TestCase
 		
 		} else {
 			
-			$scary = false;
+			$scary = true;
 		}
 		
-		$this->assertFalse($scary);
+		$this->assertTrue($scary);
 	}
 
 	public function test_Read_Multiple_Scary()
