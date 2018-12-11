@@ -162,7 +162,7 @@ The current released is only support for handling happy _global procedural_ sess
    
 * And **remove** multiple session at once
    ```php
-   Scary::trash('my_session_key, my_session_key_two, my_session_key_three, next...');
+   Scary::trash('chocomelo, durian, alphanut, loggadin, url, token, and...');
    ```
    
 * Also you can **destroy** all session and make them gone
@@ -176,43 +176,45 @@ The current released is only support for handling happy _global procedural_ sess
 ```php
 require '__DIR__' . '/vendor/autoload.php';
 
-use Vlexfid\Session\Scary;
+use Moviet\Session\Scary;
 
 // Generate Cross Smile Request Poorgery
 $randomToken = base64_encode(random_bytes(32));
 
-Scary::set('Imo Cry Attack')->value($randomToken)->get();
+Scary::set('Emo Cry Attack')->value($randomToken)->get();
 
-$check = Scary::read('Imo Cry Attack');
+$check = Scary::read('Emo Cry Attack');
 
-// dump : JHs/jsakjkja87823hsalwatah989jsajh+sakCacanana83729Mama=
+// dump : JHs+jsakjkja87823hsalwatah989jsajh+sakCacanana83729Mama=
 ```
 
 #### Create Multiple Session
 ```php
 require '__DIR__' . '/vendor/autoload.php';
 
-use Vlexfid\Session\Scary;
+use Moviet\Session\Scary;
 
 // Type whatever collection
 $verify = 'true';
 
-// Type whatever you need
-$loginId = '2928929-988787-8877-78688868';
+// Register what you need
+$loggadId = '2928929-988787-8877-78688868';
 
-// Type whatever you set
+// Type secret code etc
 $randomMult = bin2hex(random_bytes(16));
 
-// Type anything you type
+// Type like Adurl
 $downloadUrl = 'github.com/moviet/session-scary';
 
-// Compile them in single bandage
+/** 
+* Compile them in single bandage
+*/
 Scary::mset('Something key')
-->mkey(['verify','token_key','mis-loggedin','download-url'])
-->mval([$verify, $randomMult, $loginId, $downloadUrl])
-->swap();
+      ->mkey(['verify','token_key','mis-loggadin','download-url'])
+      ->mval([$verify, $randomMult, $loggadId, $downloadUrl])
+      ->swap();
 
-$clone = Scary::read('Something key','download-url');
+$getClone = Scary::read('Something key','download-url');
 
 // dump yaaaayyy : github.com/moviet/session-scary
 ```
