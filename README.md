@@ -1,4 +1,4 @@
-Scary - A simple session serializable for php
+Scary - A simple session organizer for php
 ======================================================
 
 [![Build Status](https://travis-ci.org/vlexfid/php-encryption.svg?branch=master)](https://travis-ci.org/vlexfid/php-encryption)
