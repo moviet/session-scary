@@ -1,6 +1,7 @@
 Scary - A simple session serializable for php
 ======================================================
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dcf211d482994612ad0d119bf1ed55b0)](https://app.codacy.com/app/vlexfid/session-scary?utm_source=github.com&utm_medium=referral&utm_content=vlexfid/session-scary&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/vlexfid/php-encryption.svg?branch=master)](https://travis-ci.org/vlexfid/php-encryption)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://doge.mit-license.org)
 [![Usage](https://img.shields.io/badge/usage-easy-ff69b4.svg)](https://github.com/vlexfid/php-encryption)
