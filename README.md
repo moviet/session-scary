@@ -1,7 +1,7 @@
 Scary - A simple session serializable for php
 ======================================================
 
-[![Build Status](https://img.shields.io/travis/vlexfid/session-scary.svg?style=flat-square)](https://travis-ci.com/vlexfid/session-scary)
+[![Build Status](https://travis-ci.com/vlexfid/session-scary.svg?branch=master)](https://travis-ci.com/vlexfid/session-scary)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://doge.mit-license.org)
 [![Usage](https://img.shields.io/badge/usage-easy-ff69b4.svg)](https://github.com/vlexfid/php-encryption)
 
