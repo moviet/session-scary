@@ -1,7 +1,7 @@
 {
     "name": "moviet/session-scary",
-    "description": "A simple session serializable library for php",
-    "keywords": ["session", "handler", "wrapper", "token", "simple", "global"],
+    "description": "A simple session organizer library for php",
+    "keywords": ["session", "handler", "wrapper", "token", "simple", "global", "organizer", "php-session"],
     "homepage": "https://github.com/moviet/session-scary",
     "type": "library",
     "license": "MIT",
