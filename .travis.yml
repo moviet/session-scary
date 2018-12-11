@@ -13,7 +13,7 @@ before_script:
 - composer install --no-interaction --prefer-source
 
 script: 
-- phpunit --coverage-text --coverage-clover=coverage.xml
+- phpunit --stderr --coverage-text --coverage-clover=coverage.xml
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
