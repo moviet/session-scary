@@ -1,7 +1,7 @@
 {
     "name": "moviet/session-scary",
     "description": "A simple session organizer library for php",
-    "keywords": ["session", "handler", "wrapper", "token", "simple", "global", "organizer", "php-session"],
+    "keywords": ["session", "handler", "wrapper", "token", "manager", "global", "organizer", "php-session"],
     "homepage": "https://github.com/moviet/session-scary",
     "type": "library",
     "license": "MIT",
@@ -24,7 +24,16 @@
             "Moviet\\Testing\\": "tests/"
         }
      },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "v1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
-    }
+    },
+    "minimum-stability": "dev"
 }
