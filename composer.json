@@ -1,13 +1,13 @@
 {
-    "name": "vlexfid/session-scary",
+    "name": "moviet/session-scary",
     "description": "A simple session serializable library for php",
     "keywords": ["session", "handler", "wrapper", "token", "simple", "global"],
-    "homepage": "https://github.com/vlexfid/session-scary",
+    "homepage": "https://github.com/moviet/session-scary",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Vlexfid",
+            "name": "Moviet",
             "email": "snorthfed@gmail.com"
         }
     ],
@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Vlexfid\\Session\\": "src/"
+            "Moviet\\Session\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Vlexfid\\Testing\\": "tests/"
+            "Moviet\\Testing\\": "tests/"
         }
      },
     "require-dev": {

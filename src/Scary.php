@@ -10,7 +10,7 @@
  *
  * @version    Build @@version@@
  */
-namespace Vlexfid\Session;
+namespace Moviet\Session;
 
 /**
 * start new scary thriller
