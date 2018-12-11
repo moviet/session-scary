@@ -4,7 +4,7 @@ Scary - A simple session serializable for php
 [![Build Status](https://travis-ci.org/vlexfid/php-encryption.svg?branch=master)](https://travis-ci.org/vlexfid/php-encryption)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://doge.mit-license.org)
 [![Usage](https://img.shields.io/badge/usage-easy-ff69b4.svg)](https://github.com/vlexfid/php-encryption)
-[![Coverage Status](https://coveralls.io/repos/github/vlexfid/php-encryption/badge.svg?branch=master)](https://coveralls.io/github/vlexfid/php-encryption?branch=master)
+[![codecov](https://codecov.io/gh/vlexfid/session-scary/branch/master/graph/badge.svg)](https://codecov.io/gh/vlexfid/session-scary)
 
 A very simple session organizer that may help you for handling scary styles on php
 
