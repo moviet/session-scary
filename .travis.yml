@@ -12,6 +12,7 @@ before_script:
 
 script: 
 - phpunit --stderr --coverage-text --coverage-clover=coverage.xml
+- bin/atoum --test-all
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
