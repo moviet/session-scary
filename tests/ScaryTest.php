@@ -104,14 +104,10 @@ class ScaryTest extends TestCase
 	{
 		$this->session->set('Session_Expired')->value('Expired')->ttl(0)->get();
 		
-		if ($this->session->exist('Session_Expired')) {			
+		if (is_null($this->session->exist('Session_Expired'))) {			
 			
 			$scary = 'false';
-		
-		} else {
-			
-			$scary = true;
-		}
+		} 
 		
 		$this->assertFalse($scary);
 	}
