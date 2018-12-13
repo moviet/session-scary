@@ -98,7 +98,16 @@ class ScaryTest extends TestCase
 		$this->assertTrue($increment);
 	}
 	
-	public function test_ttl_Method()
+	public function test_With_Zero_Time_To_Live()
+	{
+		$stub = $this->createMock(Scary::class);
+
+		$stub->method('ttl')->willReturn(0);
+
+		$this->assertSame(0, $stub->ttl(0));
+	}
+	
+	public function test_Time_To_Live_Method()
 	{
 		$mock = $this->createMock(Scary::class);
 
