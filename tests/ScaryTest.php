@@ -81,9 +81,9 @@ class ScaryTest extends TestCase
 	{
 		$stub = $this->createMock(Scary::class);
 
-		$stub->method('ttl')->willReturn(0);
+		$stub->method('inc')->willReturn(0);
 
-		$this->assertSame(0, $stub->ttl(0));
+		$this->assertSame(0, $stub->inc(0));
 	}
 
 	public function test_Scary_Not_Increment()
@@ -98,14 +98,16 @@ class ScaryTest extends TestCase
 		$this->assertTrue($increment);
 	}
 	
-	public function test_Session_ttl_Method()
+	public function test_ttl_Method()
 	{
 		$mock = $this->createMock(Scary::class);
 
 		$mock->method('ttl')
 			->willReturn(5);
+		
+		$this->assertEquals(5, $mock->ttl(5));
 
-		$null = empty($mock->value(5));
+		$null = empty($mock->ttl(5));
 
 		$this->assertFalse($null);
 	}
