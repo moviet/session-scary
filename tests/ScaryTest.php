@@ -9,11 +9,13 @@
  * @license    http://www.opensource.org/licenses/mit-license.html  MIT Public License
  *
  * @clone    https://github.com/vlexfid/session-scary 
+ *
+ * PHPUnit Test v7.5
  */
 namespace Moviet\Testing;
 
 use Moviet\Session\Scary;
-use PHPunit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * You can follow the example method
@@ -27,6 +29,34 @@ class ScaryTest extends TestCase
 	public function setUp() 
 	{
 		$this->session = new Scary;
+	}
+	
+	public function test_Session_Key_Cannot_Be_Empty()
+	{
+		$mock = $this->createMock(Scary::class);
+
+		$mock->method('set')
+			->willReturn('session key');
+
+		$this->assertEquals('session key', $mock->set('okay'));
+
+		$null = empty($mock->set('okay'));
+
+		$this->assertFalse($null);
+	}
+	
+	public function test_Session_Value_Cannot_Be_Empty()
+	{
+		$mock = $this->createMock(Scary::class);
+
+		$mock->method('value')
+			->willReturn('my session value');
+
+		$this->assertEquals('my session value', $mock->value('okay'));
+
+		$null = empty($mock->value('okay'));
+
+		$this->assertFalse($null);
 	}
 
 	public function test_Return_Stub_setScary()
@@ -163,6 +193,20 @@ class ScaryTest extends TestCase
 		$replace = $this->session->read('Session_Multiple','Increment');
 
 		$this->assertNotEquals($incres, $replace);
+	}
+	
+	public function test_Regenerate_New_Id_Scary()
+	{
+		$newId = $this->session->newId('Session_Multiple');
+
+		$this->assertNull($newId);
+	}
+
+	public function test_Regenerate_Refresh_Scary()
+	{
+		$refreshId = $this->session->refresh('Session_Multiple');
+
+		$this->assertNull($refreshId);
 	}
 
 	public function test_Multiple_Scary_setExpired()
