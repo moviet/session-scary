@@ -98,14 +98,12 @@ class ScaryTest extends TestCase
 		$this->assertTrue($increment);
 	}
 	
-	public function test_Session_ttl_Cannot_Be_Empty()
+	public function test_Session_ttl_Method()
 	{
 		$mock = $this->createMock(Scary::class);
 
 		$mock->method('ttl')
 			->willReturn(5);
-
-		$this->assertEquals(5, $mock->value(5));
 
 		$null = empty($mock->value(5));
 
