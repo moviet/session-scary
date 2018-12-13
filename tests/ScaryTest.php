@@ -10,7 +10,7 @@
  *
  * @clone    https://github.com/vlexfid/session-scary 
  *
- * PHPUnit Test v7.5
+ * PHPUnit Test v6.5
  */
 namespace Moviet\Testing;
 
@@ -96,6 +96,20 @@ class ScaryTest extends TestCase
 		}
 
 		$this->assertTrue($increment);
+	}
+	
+	public function test_Session_ttl_Cannot_Be_Empty()
+	{
+		$mock = $this->createMock(Scary::class);
+
+		$mock->method('ttl')
+			->willReturn(5);
+
+		$this->assertEquals(5, $mock->value(5));
+
+		$null = empty($mock->value(5));
+
+		$this->assertFalse($null);
 	}
 
 	public function test_Scary_Was_Already_Exists()
