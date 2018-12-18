@@ -1,12 +1,12 @@
 <?php
 /**
- * Scary - A simple session serializable for PHP
+ * Scary - A simple session organizer for PHP
  *
  * @category   Scary Session
  * @package    Rammy Labs
  *
- * @author     Vlexfid
- * @license    http://www.opensource.org/licenses/mit-license.html  MIT Public License
+ * @author     Moviet
+ * @license    MIT Public License
  *
  * @version    Build @@version@@
  */
@@ -18,62 +18,62 @@ namespace Moviet\Session;
 class Scary
 {
     /**
-     * @param string key
+     * @param string $key
      */
     protected static $key;
 
     /**
-     * @param string value
+     * @param string $value
      */
     protected static $value;
     
     /**
-     * compile entry
+     * @param string $entry
      */
     protected static $entry;
     
     /**
-     * generate story
+     * @param string $value
      */
     protected static $story;
     
     /**
-     * @param string session exist
+     * @param string $exist
      */
     protected static $exist;
     
     /**
-     * @param int set increment
+     * @param int $inc
      */
     protected static $inc;
     
     /**
-     * set variable limit
+     * set variable $limit
      */
     protected static $limit;
     
     /**
-     * @param int set expiration
+     * @param int $ttl
      */
     protected static $ttl;
     
     /**
-     * @param int set multiexpiration
+     * @param int $live
      */
     protected static $live;
     
     /**
-     * @param string set multi session key
+     * @param string $mset
      */
     protected static $mset;
     
     /**
-     * @param string set multi session subkeys
+     * @param string $mkey
      */
     protected static $mkey;
     
     /**
-     * @param string set multi session values
+     * @param string $mvalue
      */
     protected static $mvalue;
 
@@ -94,7 +94,7 @@ class Scary
     const INCREMENT_KEY_START = 1;
 
     /**
-     * Check if session id was already started
+     * Check if session was already started
      */
     public function __construct() 
     {
@@ -102,7 +102,9 @@ class Scary
     }
 
     /**
-     * @param string create session key
+     * Create single session key
+     *
+     * @param string $key
      */
     public function set($key)
     {
@@ -112,7 +114,9 @@ class Scary
     }
 
     /**
-     * @param string create session value
+     * Create value for single seesion key
+     *
+     * @var $value
      */
     public function value($value)
     {
@@ -122,7 +126,9 @@ class Scary
     }
 
     /**
-     * @param int create session expired in seconds
+     * Create session expired
+     *
+     * @param int $ttl
      */
     public function ttl($ttl)
     {
@@ -132,7 +138,9 @@ class Scary
     }
 
     /**
-     * @param int create session increment
+     * Create session increment
+     *
+     * @param int $increment
      */
     public function inc($increment = null)
     {
@@ -142,7 +150,9 @@ class Scary
     }
 
     /**
-     * Getting session increment
+     * Generate session increment
+     *
+     * @return int
      */
     protected function getInc()
     {
@@ -150,20 +160,18 @@ class Scary
     }
 
     /**
-     * Verify session increment
+     * Verify session increment if exists
+     * calculate value and destroy
      * 
-     * @param string session key
-     * 
-     * @return boolen;
+     * @param string $key
+     * @return bool
      */
-    public function flinc($key, $default = false)
+    public function flinc($key)
     {
         self::$limit = self::make(self::INCREMENT_KEY,self::INCREMENT_KEY);
 
         if (self::exist($key)) {
-
             if (self::$limit > array_values(self::getInc())[self::INCREMENT_KEY_LOOP]) {
-
                 self::remove(self::INCREMENT_KEY);
                 self::remove($key);
 
@@ -176,6 +184,9 @@ class Scary
 
     /**
      * Generate expire time
+     *
+     * @param string $timer
+     * @return array
      */
     protected function entry($timer = null)
     {
@@ -186,6 +197,9 @@ class Scary
 
     /**
      * Generate expire id 
+     *
+     * @param string $timer
+     * @return array
      */
     protected function create($timer = null)
     {
@@ -196,7 +210,7 @@ class Scary
 
     /**
      * Save session with single method
-     * Create session expire and session increment
+     * Create session identity
      * 
      * Remove if session key has expired
      */
@@ -211,25 +225,21 @@ class Scary
         $book = array_combine([self::$key, self::$story], [self::$value, self::$entry]);
 
         if (!self::exist(self::$key)) {
-
             self::save(self::$key, $book);
         }
        
         /**
-         * Check if session increment was negotiated
+         * Check if session increment has negotiated
          */
         if (!is_null(self::$inc[self::$key])) {   
-
             self::sinc(self::INCREMENT_KEY);
         }
 
         /**
-         * Check if session expirated was negotiated
+         * Check if session has negotiated to expired
          */
         if (self::$entry === time()) {
-
             if ((time() - self::make(self::$key)[self::$story]) > (self::$ttl[self::$key])) {
-
                 self::refresh(self::$key);
                 self::remove(self::$key);
             }     
@@ -237,9 +247,11 @@ class Scary
     }
 
     /**
-     * Getting session value
+     * Getting session from single or multiple method
      * 
-     * @param string session value
+     * @param string $key
+     * @param string $id
+     * @return array
      */
     public function read($key, $id = '')
     {
@@ -247,12 +259,12 @@ class Scary
     }
 
     /**
-     * Revision any session value
+     * Change or revision any session value
      * Generate timer when it was set
      * 
-     * @param string session_key and new value
-     * 
-     * @return boolen if doesn't exists
+     * @param string $key
+     * @param string $value
+     * @return bool
      */
     public function change($key, $value)
     {
@@ -268,14 +280,14 @@ class Scary
     }
 
     /**
-     * Set session key
+     * Create session key for multiple value
      * 
-     * @param string session key
+     * @param string $keys
+     * @return array
      */
     public function mset($keys)
     {
         foreach ([$keys] as $key) {
-
             self::$mset[$key] = $key;
         }
 
@@ -283,9 +295,10 @@ class Scary
     }
 
     /**
-     * Set session subkey
+     * Create session with multiple subkey
      * 
-     * @param string session subkey
+     * @param string $id
+     * @return array
      */
     public function mkey($id)
     {
@@ -297,9 +310,10 @@ class Scary
     }
 
     /**
-     * Set session value
+     * Create session with multiple value
      * 
-     * @param string session value
+     * @param string $value
+     * @return array
      */
     public function mval($value)
     {
@@ -311,13 +325,12 @@ class Scary
     }
 
     /**
-     * Set expire session using multi method
+     * Create session expires for multiple method
+     * and remove if session has expired
      * 
-     * @param string session key
-     * 
-     * @param int set time to live
-     * 
-     * @return boolen if emtpy session
+     * @param string $key
+     * @param int $ttl
+     * @return bool
      */
     public function live($key, $ttl)
     {
@@ -326,12 +339,10 @@ class Scary
         $value = [$live => time()];
 
         if (!self::exist($live)) {
-
             self::save($live, $value);
         } 
 
         if ((time() - self::make($live)[$live]) > ($ttl * self::EXPIRED_IN_SECOND)) {
-
             self::refresh($live);
             self::remove($key);
             self::remove($live); 
@@ -341,31 +352,26 @@ class Scary
     }
 
     /**
-     * Save session with multiple attributes
-     * 
-     * @return array session set
+     * Generate session with multiple attributes
      */
     public function swap()
     {
         $book = array_combine(self::$mkey, self::$mvalue);
         
         foreach (self::$mset as $key => &$value) {
-
             if (!self::exist(self::$mset[$value])) {
-
                 self::save(self::$mset[$value], $book);
             }
         }
     }
 
     /**
-     * Evaluate multi session replacement
+     * Evaluate and replace session with multiple value
      * 
-     * @param string session key and subkey and new value
-     * 
-     * @return array session set
-     * 
-     * @return boolen if emtpy session
+     * @param string $mset
+     * @param string $mkey
+     * @param string $mvalue
+     * @return bool
      */
     public function mchange($mset, $mkey, $mvalue = null)
     {
@@ -378,7 +384,6 @@ class Scary
         $book = array_merge(self::make($mset), $value);
 
         if (self::exist($mset)) {
-
             self::save($mset, $book);
         }
 
@@ -386,18 +391,16 @@ class Scary
     }
 
     /**
-     * Remove any existing keys and keep clean
+     * Remove any existing session with key identity
      * 
-     * @param string session key 
-     * 
-     * @return boolen if emtpy session
+     * @param string $key
+     * @return bool
      */
     public function trash($key)
     {
         $keys = !is_array($key) ? array_filter(explode(',',$key)) : $key;
 
         foreach ($keys as $val) {
-
             self::remove($val);
             self::remove(self::flinc($key));
         }
@@ -406,40 +409,38 @@ class Scary
     }
 
     /**
-     * Regenerate session id when they were exists
+     * Regenerate session id when they exists
      * 
-     * @param string session key 
+     * @param string $key
      */
     public function refresh($key)
     {
         if (self::exist($key)) {
-
             session_regenerate_id(true);
         }
     }
 
     /**
-     * Regenerate new session id when they were exists
+     * Regenerate new session id when they exists
      * 
-     * @param string session key 
+     * @param string $key
      */
     public function newId($key)
     {
         if (self::exist($key)) {
-
             session_regenerate_id();
         }
     }
 
     /**
-     * Destroy session id when they were exists
+     * Destroy session id when they exists
      * 
-     * @param boolen value
+     * @param string $key
+     * @return bool
      */
     public function clean($key)
     {
         if (self::exist($key)) {
-
             session_regenerate_id(true);
             session_unset();
             session_destroy();
@@ -449,10 +450,11 @@ class Scary
     }
 
     /**
-     * Make session readable
-     * Read to read
+     * Make session readable from serialize
      * 
-     * @param array session
+     * @param string $key
+     * @param string $id
+     * @return array
      */
     protected function make($key, $id = null)
     {
@@ -460,9 +462,10 @@ class Scary
     } 
 
     /**
-     * Make session auto increment
+     * Generate session auto increment
      * 
-     * @return string serializable session
+     * @param string $key
+     * @return array
      */
     protected function sinc($key)
     {
@@ -472,7 +475,9 @@ class Scary
     /**
      * Save session early
      * 
-     * @return string serialize session
+     * @param string $key
+     * @param string $value
+     * @return array
      */
     protected function save($key, $value)
     {
@@ -480,9 +485,10 @@ class Scary
     }
 
     /**
-     * Check if session does exists
+     * Check if session has exists
      * 
-     * @return boolen serialize session
+     * @param string $key
+     * @return bool
      */
     public function exist($key)
     {
@@ -490,7 +496,7 @@ class Scary
     }
 
     /**
-     * unset session that's already exists
+     * unset session has already exists
      */
     protected function remove($key)
     {       
