@@ -13,8 +13,8 @@
 namespace Moviet\Session;
 
 /**
-* start new scary thriller
-*/
+ * start new scary thriller
+ */
 class Scary
 {
     /**
@@ -217,27 +217,21 @@ class Scary
     public function get()
     {
         self::$story = !isset(self::$ttl[self::$key]) ? self::CREATE_SERIAL_KEY . time() : self::CREATE_SERIAL_END . hash(self::HASH_SERIAL_KEY, self::$key);
-
         self::$entry = !isset(self::$ttl[self::$key]) ? self::CREATE_SERIAL_ID . hash(self::HASH_SERIAL_KEY,self::$key) : time();  
 
         $spare = [self::$story => self::$entry];
-
         $book = array_combine([self::$key, self::$story], [self::$value, self::$entry]);
 
         if (!self::exist(self::$key)) {
             self::save(self::$key, $book);
         }
        
-        /**
-         * Check if session increment has negotiated
-         */
+        // Check if session increment has negotiable
         if (!is_null(self::$inc[self::$key])) {   
             self::sinc(self::INCREMENT_KEY);
         }
 
-        /**
-         * Check if session has negotiated to expired
-         */
+        // Check if session has negotiable to expired
         if (self::$entry === time()) {
             if ((time() - self::make(self::$key)[self::$story]) > (self::$ttl[self::$key])) {
                 self::refresh(self::$key);
@@ -269,11 +263,9 @@ class Scary
     public function change($key, $value)
     {
         self::$story = !isset(self::$ttl[self::$key]) ? self::CREATE_SERIAL_KEY . time() : self::CREATE_SERIAL_END . hash(self::HASH_SERIAL_KEY, $key);
-
         self::$entry = !isset(self::$ttl[self::$key]) ? self::CREATE_SERIAL_ID . hash(self::HASH_SERIAL_KEY, $key) : self::$entry = time(); 
         
         $book = array_combine([$key, self::$story], [$value, self::$entry]);
-
         self::save($key, $book);
 
         return self::exist($key) ? true : false;
@@ -303,7 +295,7 @@ class Scary
     public function mkey($id)
     {
         $ids = !is_array($id) ? array_filter(explode(',',$id)) : $id;
-
+        
         self::$mkey = $ids;
 
         return $this;
@@ -318,7 +310,7 @@ class Scary
     public function mval($value)
     {
         $values = !is_array($value) ? array_filter(explode(',',$value)) : $value;
-
+        
         self::$mvalue = $values;
 
         return $this;
@@ -376,11 +368,9 @@ class Scary
     public function mchange($mset, $mkey, $mvalue = null)
     {
         $mkey = !is_array($mkey) ? array_filter(explode(',',$mkey)) : $mkey;
-
         $mvalue = !is_array($mvalue) ? array_filter(explode(',',$mvalue)) : $mvalue;
         
         $value = array_combine($mkey, $mvalue);
-        
         $book = array_merge(self::make($mset), $value);
 
         if (self::exist($mset)) {
